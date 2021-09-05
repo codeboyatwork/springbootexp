@@ -26,7 +26,7 @@ node {
 			
 	    stage('Build Docker Image') {
 	      // build docker image
-	      dockerImage = docker.build("sbexample:${env.BUILD_NUMBER}")
+	      dockerImage = docker.build("tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}")
 	    }
 	   
 	    stage('Deploy Docker Image'){
