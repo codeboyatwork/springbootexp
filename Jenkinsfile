@@ -24,7 +24,7 @@ node {
 	    }
 	    stage('Run Unit Tests') {
 	      // build project via maven
-	      sh "'${mvnHome}/bin/mvn' clean verify -Dtest=com.experiment.demo.SimpleCalulatorTest"
+	      sh "'${mvnHome}/bin/mvn' clean test -Dtest=com.experiment.demo.SimpleCalulatorTest"
 	    }   
 	  
 	    stage('Build Project') {
