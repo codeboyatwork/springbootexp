@@ -45,5 +45,5 @@ node {
 	    dockerImage.push("${env.BUILD_NUMBER}")
 	    dockerImage.push("latest")
 	    }
-	      
+	    }
 }
