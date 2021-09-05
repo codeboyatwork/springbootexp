@@ -17,7 +17,15 @@ node {
 	      // ** NOTE: This 'maven-3.5.2' Maven tool must be configured
 	      // **       in the global configuration.           
 	      mvnHome = tool 'maven'
-	    }    
+	    } 
+	    stage('Compile') {
+	      // build project via maven
+	      sh "'${mvnHome}/bin/mvn' clean compile"
+	    }
+	    stage('Run Unit Tests') {
+	      // build project via maven
+	      sh "'${mvnHome}/bin/mvn' clean verify -Dtest=com.experiment.demo.SimpleCalulatorTest"
+	    }   
 	  
 	    stage('Build Project') {
 	      // build project via maven
