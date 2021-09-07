@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import com.experiment.demo.serviceimpl.CalculatorService;
 
@@ -11,22 +13,25 @@ public class SimpleCalulatorTest {
 	
 	CalculatorService service = new CalculatorService();
 
-	@Test
-	void testAdd()
+	@ParameterizedTest
+	@ArgumentsSource(ProvideIntsForAddition.class)
+	void testAdd(int a,int b, int c)
 	{
-		assertEquals(5,service.add(3, 2));
+		assertEquals(c,service.add(a, b));
 	}
 	
-	@Test
-	void testSubtract()
+	@ParameterizedTest
+	@ArgumentsSource(ProvideIntsForSubtraction.class)
+	void testSubtract(int a,int b, int c)
 	{
-		assertEquals(1,service.subtract(3, 2));
+		assertEquals(c,service.subtract(a, b));
 	}
 	
-	@Test
-	void testMultiply()
+	@ParameterizedTest
+	@ArgumentsSource(ProvideIntsForMultiplication.class)
+	void testMultiply(int a,int b, int c)
 	{
-		assertEquals(6,service.multiply(3, 2));
+		assertEquals(c,service.multiply(a, b));
 	}
 	
 	@Test
@@ -40,4 +45,5 @@ public class SimpleCalulatorTest {
 	{
 		assertThrows(ArithmeticException.class, () -> {service.divide(5, 0);});
 	}
+	
 }
