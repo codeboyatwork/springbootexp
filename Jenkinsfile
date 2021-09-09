@@ -24,12 +24,15 @@ node {
 	    }
 	    stage('Run Unit Tests') {
 	      // build project via maven
-	      sh "'${mvnHome}/bin/mvn' clean test -Dtest=com.experiment.demo.SimpleCalulatorTest"
+	      sh "'${mvnHome}/bin/mvn' clean test -Dtest=com.experiment.demo.unittests.**.*Test*"
+	    } 
+	    stage('Run Integration Tests') {
+	      // build project via maven
+	      sh "'${mvnHome}/bin/mvn' clean test -Dtest=com.experiment.demo.integrationtests.**.*Test*"
 	    }   
-	  
 	    stage('Build Project') {
 	      // build project via maven
-	      sh "'${mvnHome}/bin/mvn' clean install"
+	      sh "'${mvnHome}/bin/mvn' clean install -DskipTests"
 	    }
 			
 	    stage('Build Docker Image') {

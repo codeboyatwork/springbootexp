@@ -1,4 +1,4 @@
-package com.experiment.demo;
+package com.experiment.demo.unittests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,6 +8,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import com.experiment.demo.serviceimpl.CalculatorService;
+import com.experiment.demo.testbase.ProvideIntsForAddition;
+import com.experiment.demo.testbase.ProvideIntsForMultiplication;
+import com.experiment.demo.testbase.ProvideIntsForSubtraction;
 
 public class SimpleCalulatorTest {
 	
