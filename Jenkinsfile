@@ -45,11 +45,12 @@ node {
 	      // deploy docker image to nexus
 			
 	      echo "Docker Image Tag Name: ${dockerImageTag}"
-		  sh "docker run -d -p 2222:2222 -p 8080:8080 tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}"
+		  sh "docker run --name sbexample_integration -d -p 2222:2222 -p 8080:8080 tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}"
 		  
 		  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 	    dockerImage.push("${env.BUILD_NUMBER}")
 	    dockerImage.push("latest")
+	    sh "docker rm -f sbexample_integration"
 	    }
 	    }
 }
