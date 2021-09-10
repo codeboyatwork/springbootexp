@@ -53,7 +53,7 @@ node {
 	      def jobHandle = build(
 								job: "springoot-app-test",
 								wait: true,
-								paramters: [
+								parameters: [
 								string(name: 'NODE_LABEL', value: 'node-2004'),
 								string(name: 'IMAGE_NAME', value: 'sbexample:${env.BUILD_NUMBER}'),
 								booleanParam(name: 'E2E_TESTS', value: true),
