@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import com.experiment.demo.serviceimpl.CalculatorService;
 import com.experiment.demo.testbase.ProvideIntsForAddition;
+import com.experiment.demo.testbase.ProvideIntsForDivision;
 import com.experiment.demo.testbase.ProvideIntsForMultiplication;
 import com.experiment.demo.testbase.ProvideIntsForSubtraction;
 
@@ -18,27 +19,28 @@ public class SimpleCalulatorTest {
 
 	@ParameterizedTest
 	@ArgumentsSource(ProvideIntsForAddition.class)
-	void testAdd(int a,int b, int c)
+	void testAdd(long a,long b, long c)
 	{
 		assertEquals(c,service.add(a, b));
 	}
 	
 	@ParameterizedTest
 	@ArgumentsSource(ProvideIntsForSubtraction.class)
-	void testSubtract(int a,int b, int c)
+	void testSubtract(long a,long b, long c)
 	{
 		assertEquals(c,service.subtract(a, b));
 	}
 	
 	@ParameterizedTest
 	@ArgumentsSource(ProvideIntsForMultiplication.class)
-	void testMultiply(int a,int b, int c)
+	void testMultiply(long a,long b, long c)
 	{
 		assertEquals(c,service.multiply(a, b));
 	}
 	
-	@Test
-	void testDivide()
+	@ParameterizedTest
+	@ArgumentsSource(ProvideIntsForDivision.class)
+	void testDivide(long a,long b, long c)
 	{
 		assertEquals(1,service.divide(5, 5));
 	}

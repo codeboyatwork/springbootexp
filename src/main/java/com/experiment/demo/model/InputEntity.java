@@ -1,19 +1,19 @@
 package com.experiment.demo.model;
 
 public class InputEntity {
-	int a;
-	int b;
+	long a;
+	long b;
 	
-	public int getA() {
+	public long getA() {
 		return a;
 	}
-	public void setA(int a) {
+	public void setA(long a) {
 		this.a = a;
 	}
-	public int getB() {
+	public long getB() {
 		return b;
 	}
-	public void setB(int b) {
+	public void setB(long b) {
 		this.b = b;
 	}
 	

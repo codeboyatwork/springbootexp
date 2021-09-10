@@ -22,9 +22,9 @@ public class SimpleCalculatorController {
 
 	@PostMapping("/addition")
 	public ResponseEntity<Object> performAddition(@RequestBody InputEntity inputEntity) {
-		int a = inputEntity.getA();
-		int b = inputEntity.getB();
-		int c = calculatorService.add(a, b);
+		long a = inputEntity.getA();
+		long b = inputEntity.getB();
+		long c = calculatorService.add(a, b);
 		logger.info("Addition of "+a+" and "+b+" is "+c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
@@ -33,9 +33,9 @@ public class SimpleCalculatorController {
 	
 	@PostMapping("/subtraction")
 	public ResponseEntity<Object> performSubtraction(@RequestBody InputEntity inputEntity) {
-		int a = inputEntity.getA();
-		int b = inputEntity.getB();
-		int c = calculatorService.subtract(a, b);
+		long a = inputEntity.getA();
+		long b = inputEntity.getB();
+		long c = calculatorService.subtract(a, b);
 		logger.info("Subtraction of "+a+" and "+b+" is "+c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
@@ -44,9 +44,9 @@ public class SimpleCalculatorController {
 	
 	@PostMapping("/multiplication")
 	public ResponseEntity<Object> performMultiplication(@RequestBody InputEntity inputEntity) {
-		int a = inputEntity.getA();
-		int b = inputEntity.getB();
-		int c = calculatorService.multiply(a, b);
+		long a = inputEntity.getA();
+		long b = inputEntity.getB();
+		long c = calculatorService.multiply(a, b);
 		logger.info("Multiplication of "+a+" and "+b+" is "+c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
@@ -55,9 +55,9 @@ public class SimpleCalculatorController {
 	
 	@PostMapping("/division")
 	public ResponseEntity<Object> performDivision(@RequestBody InputEntity inputEntity) {
-		int a = inputEntity.getA();
-		int b = inputEntity.getB();
-		int c = calculatorService.divide(a, b);
+		long a = inputEntity.getA();
+		long b = inputEntity.getB();
+		long c = calculatorService.divide(a, b);
 		logger.info("Division of "+a+" and "+b+" is "+c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);

@@ -1,13 +1,13 @@
 package com.experiment.demo.model;
 
 public class OutputEntity {
-	int answer;
+	long answer;
 
-	public int getAnswer() {
+	public long getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(int answer) {
+	public void setAnswer(long answer) {
 		this.answer = answer;
 	}
 	

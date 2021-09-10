@@ -5,15 +5,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class CalculatorService {
 
-	public int add(int a, int b) {
+	public long add(long a, long b) {
 		return a+b;
 	}
 	
-	public int subtract(int a, int b) {
+	public long subtract(long a, long b) {
 		return a-b;
 	}
 	
-	public int divide(int a, int b) {
+	public long divide(long a, long b) {
 		try {
 		return a/b;
 		}
@@ -23,7 +23,7 @@ public class CalculatorService {
 		}
 	}
 	
-	public int multiply(int a, int b) {
+	public long multiply(long a, long b) {
 		return a*b;
 	}
 }
