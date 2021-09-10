@@ -56,7 +56,7 @@ node {
 								job: "springboot-app-test",
 								wait: true,
 								parameters: [
-								string(name: 'NODE_LABEL', value: 'node-2004'),
+								string(name: 'NODE_LABEL', value: env.NODE_NAME),
 								string(name: 'IMAGE_NAME', value: dockerImageName),
 								booleanParam(name: 'E2E_TESTS', value: true),
 								booleanParam(name: 'ACCEPTANCE_TESTS', value: false)
