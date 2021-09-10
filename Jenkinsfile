@@ -51,7 +51,7 @@ node {
 	    
 	    stage('Run E2E Tests') {
 	      def jobHandle = build(
-								job: "springoot-app-test",
+								job: "springboot-app-test",
 								wait: true,
 								parameters: [
 								string(name: 'NODE_LABEL', value: 'node-2004'),
