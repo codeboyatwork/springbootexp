@@ -7,8 +7,8 @@ node {
 	    // holds reference to docker image
 	    def dockerImage
 	    // ip address of the docker private repository(nexus)
-	 
 	    def dockerImageTag = "sbexample${env.BUILD_NUMBER}"
+	    def dockerImageName
 	    
 	    stage('Clone Repo') { // for display purposes
 	      // Get some code from a GitHub repository
@@ -47,15 +47,17 @@ node {
 	      echo "Docker Image Tag Name: ${dockerImageTag}"
 		  sh "docker run --name sbexample_integration -d -p 2222:2222 -p 8080:8080 tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}"
 	      sh "docker rm -f sbexample_integration"
+	      dockerImageName = "sbexample:${env.BUILD_NUMBER}"
 	    }
 	    
 	    stage('Run E2E Tests') {
+	      echo "Docker Image Name ${dockerImageName}"
 	      def jobHandle = build(
 								job: "springboot-app-test",
 								wait: true,
 								parameters: [
 								string(name: 'NODE_LABEL', value: 'node-2004'),
-								string(name: 'IMAGE_NAME', value: 'sbexample:${env.BUILD_NUMBER}'),
+								string(name: 'IMAGE_NAME', value: dockerImageName),
 								booleanParam(name: 'E2E_TESTS', value: true),
 								booleanParam(name: 'ACCEPTANCE_TESTS', value: false)
 								]
