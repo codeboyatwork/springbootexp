@@ -40,17 +40,32 @@ node {
 	      dockerImage = docker.build("tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}")
 	    }
 	   
-	    stage('Deploy Docker Image'){
+	    stage('Check Docker Image'){
 	      
 	      // deploy docker image to nexus
 			
 	      echo "Docker Image Tag Name: ${dockerImageTag}"
 		  sh "docker run --name sbexample_integration -d -p 2222:2222 -p 8080:8080 tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}"
-		  
-		  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-	    dockerImage.push("${env.BUILD_NUMBER}")
-	    dockerImage.push("latest")
-	    sh "docker rm -f sbexample_integration"
+	      sh "docker rm -f sbexample_integration"
+	    }
+	    
+	    stage('Run E2E Tests') {
+	      def jobHandle = build(
+								job: "springoot-app-test",
+								wait: true,
+								paramters: [
+								string(name: 'NODE_LABEL', value: 'node-2004'),
+								string(name: 'IMAGE_NAME', value: 'sbexample:${env.BUILD_NUMBER}'),
+								booleanParam(name: 'E2E_TESTS', value: true),
+								booleanParam(name: 'ACCEPTANCE_TESTS', value: false)
+								]
+								)
+	    }
+	    
+	    stage('Deploy Docker Image') {
+		    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+		    dockerImage.push("${env.BUILD_NUMBER}")
+		    dockerImage.push("latest")
 	    }
 	    }
 }
