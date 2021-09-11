@@ -1,4 +1,4 @@
-node {
+node('build-2004') {
 	    // reference to maven
 	    // ** NOTE: This 'maven-3.5.2' Maven tool must be configured in the Jenkins Global Configuration.   
 	    def mvnHome = tool 'maven'
