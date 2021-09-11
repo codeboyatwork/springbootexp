@@ -58,12 +58,23 @@ node {
 								parameters: [
 								string(name: 'NODE_LABEL', value: env.NODE_NAME),
 								string(name: 'IMAGE_NAME', value: dockerImageName),
-								booleanParam(name: 'E2E_TESTS', value: true),
-								booleanParam(name: 'ACCEPTANCE_TESTS', value: false)
+								booleanParam(name: 'E2E_TESTS', value: true)
 								]
 								)
 	    }
 	    
+	    stage('Run Acceptance Tests') {
+	      echo "Docker Image Name ${dockerImageName}"
+	      def jobHandle = build(
+								job: "springboot-app-acceptance",
+								wait: true,
+								parameters: [
+								string(name: 'NODE_LABEL', value: env.NODE_NAME),
+								string(name: 'IMAGE_NAME', value: dockerImageName),
+								booleanParam(name: 'ACCEPTANCE_TESTS', value: true)
+								]
+								)
+	    }
 	    stage('Deploy Docker Image') {
 		    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 		    dockerImage.push("${env.BUILD_NUMBER}")
