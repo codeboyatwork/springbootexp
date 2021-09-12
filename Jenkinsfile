@@ -9,6 +9,7 @@ node('build-2004') {
 	    // ip address of the docker private repository(nexus)
 	    def dockerImageTag = "sbexample${env.BUILD_NUMBER}"
 	    def dockerImageName
+	    def dockerImageGcr
 	    
 	    stage('Clone Repo') { // for display purposes
 	      // Get some code from a GitHub repository
@@ -76,9 +77,29 @@ node('build-2004') {
 								)
 	    }
 	    stage('Deploy Docker Image') {
+		    parallel dockerhub: {
 		    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 		    dockerImage.push("${env.BUILD_NUMBER}")
 		    dockerImage.push("latest")
+	    	}
+	    },
+	    gcregistry: {
+	    	dockerImageGcr = docker.build("ultra-resolver-320013/sbexample:${env.BUILD_NUMBER}")
+	    	docker.withRegistry('https://gcr.io', 'gcr:ultra-resolver-320013-cloud-run') {
+		    dockerImage.push("${env.BUILD_NUMBER}")
+		    dockerImage.push("latest")
+		    }
 	    }
+	    }
+	    stage('Deploy to Cloud Run'){
+	    def jobHandle = build(
+								job: "springboot-app-deploy",
+								wait: true,
+								parameters: [
+								string(name: 'NODE_LABEL', value: env.NODE_NAME),
+								string(name: 'IMAGE_NAME', value: dockerImageName),
+								string(name: 'APP_NAME', value: 'sbexample')
+								]
+								)
 	    }
 }
