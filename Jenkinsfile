@@ -59,7 +59,9 @@ node('build-2004') {
 								parameters: [
 								string(name: 'NODE_LABEL', value: env.NODE_NAME),
 								string(name: 'IMAGE_NAME', value: dockerImageName),
-								booleanParam(name: 'E2E_TESTS', value: true)
+								string(name: 'URL', value: 'http://localhost:8081'),
+								booleanParam(name: 'E2E_TESTS', value: true),
+								booleanParam(name: 'PRODUCTION_CHECKOUT', value: false)
 								]
 								)
 	    }
@@ -106,6 +108,7 @@ node('build-2004') {
 	    }
 	    stage('Run Production Checkout') {
 	      echo "Docker Image Name ${dockerImageName}"
+	      parallel acceptance: {
 	      def jobHandle = build(
 								job: "springboot-app-acceptance",
 								wait: true,
@@ -117,5 +120,18 @@ node('build-2004') {
 								booleanParam(name: 'PRODUCTION_CHECKOUT', value: true)
 								]
 								)
+		 }, stress: {
+		        def jobHandle = build(
+								job: "springboot-app-test",
+								wait: true,
+								parameters: [
+								string(name: 'NODE_LABEL', value: env.NODE_NAME),
+								string(name: 'IMAGE_NAME', value: dockerImageName),
+								string(name: 'URL', value: 'https://sbexample-uvjhrqmtja-uc.a.run.app'),
+								booleanParam(name: 'E2E_TESTS', value: false),
+								booleanParam(name: 'PRODUCTION_CHECKOUT', value: true)
+								]
+								)							
+	    }
 	    }
 }
