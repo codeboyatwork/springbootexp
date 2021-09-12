@@ -72,7 +72,7 @@ node('build-2004') {
 								parameters: [
 								string(name: 'NODE_LABEL', value: env.NODE_NAME),
 								string(name: 'IMAGE_NAME', value: dockerImageName),
-								string(name: 'URL', value: 'http://localhost:8081'),
+								string(name: 'URL', value: 'http://localhost:8082'),
 								booleanParam(name: 'ACCEPTANCE_TESTS', value: true),
 								booleanParam(name: 'PRODUCTION_CHECKOUT', value: false)
 								]
