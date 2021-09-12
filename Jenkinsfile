@@ -86,8 +86,8 @@ node('build-2004') {
 	    gcregistry: {
 	    	dockerImageGcr = docker.build("ultra-resolver-320013/sbexample:${env.BUILD_NUMBER}")
 	    	docker.withRegistry('https://gcr.io', 'gcr:ultra-resolver-320013-cloud-run') {
-		    dockerImage.push("${env.BUILD_NUMBER}")
-		    dockerImage.push("latest")
+		    dockerImageGcr.push("${env.BUILD_NUMBER}")
+		    dockerImageGcr.push("latest")
 		    }
 	    }
 	    }
