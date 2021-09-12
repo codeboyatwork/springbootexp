@@ -72,7 +72,9 @@ node('build-2004') {
 								parameters: [
 								string(name: 'NODE_LABEL', value: env.NODE_NAME),
 								string(name: 'IMAGE_NAME', value: dockerImageName),
-								booleanParam(name: 'ACCEPTANCE_TESTS', value: true)
+								string(name: 'URL', value: 'http://localhost:8081'),
+								booleanParam(name: 'ACCEPTANCE_TESTS', value: true),
+								booleanParam(name: 'PRODUCTION_CHECKOUT', value: false)
 								]
 								)
 	    }
@@ -99,6 +101,20 @@ node('build-2004') {
 								string(name: 'NODE_LABEL', value: env.NODE_NAME),
 								string(name: 'IMAGE_NAME', value: dockerImageName),
 								string(name: 'APP_NAME', value: 'sbexample')
+								]
+								)
+	    }
+	    stage('Run Production Checkout') {
+	      echo "Docker Image Name ${dockerImageName}"
+	      def jobHandle = build(
+								job: "springboot-app-acceptance",
+								wait: true,
+								parameters: [
+								string(name: 'NODE_LABEL', value: env.NODE_NAME),
+								string(name: 'IMAGE_NAME', value: dockerImageName),
+								string(name: 'URL', value: 'https://sbexample-uvjhrqmtja-uc.a.run.app'),
+								booleanParam(name: 'ACCEPTANCE_TESTS', value: false),
+								booleanParam(name: 'PRODUCTION_CHECKOUT', value: true)
 								]
 								)
 	    }
