@@ -38,16 +38,8 @@ node('') {
 			
 	    stage('Build Docker Image') {
 	      // build docker image
+	      docker.withTool('docker'){
 	      dockerImage = docker.build("tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}")
-	    }
-	   
-	    stage('Check Docker Image'){
-	      
-	      // deploy docker image to nexus
-			
-	      echo "Docker Image Tag Name: ${dockerImageTag}"
-		  sh "docker run --name sbexample_integration -d -p 2222:2222 -p 8080:8080 tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}"
-	      sh "docker rm -f sbexample_integration"
-	      dockerImageName = "sbexample:${env.BUILD_NUMBER}"
+	      }
 	    }
 }
