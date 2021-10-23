@@ -37,9 +37,6 @@ node('') {
 	    }
 			
 	    stage('Build Docker Image') {
-	      // build docker image
-	      docker.withTool('docker'){
 	      dockerImage = docker.build("tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}")
-	      }
 	    }
 }
