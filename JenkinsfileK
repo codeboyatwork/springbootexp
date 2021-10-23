@@ -35,8 +35,4 @@ node('') {
 	      // build project via maven
 	      sh "'${mvnHome}/bin/mvn' clean install -DskipTests"
 	    }
-			
-	    stage('Build Docker Image') {
-	      dockerImage = docker.build("tanmaydeshmukh1/sbexample:${env.BUILD_NUMBER}")
-	    }
 }
