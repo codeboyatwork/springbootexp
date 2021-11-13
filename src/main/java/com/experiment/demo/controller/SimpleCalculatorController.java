@@ -20,15 +20,18 @@ public class SimpleCalculatorController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(SimpleCalculatorController.class);
 
+	private static final String AND = "and";
+	private static final String IS = "is";
+
 	@PostMapping("/addition")
 	public ResponseEntity<Object> performAddition(@RequestBody InputEntity inputEntity) {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.add(a, b);
-		logger.info("Addition of "+a+" and "+b+" is "+c);
+		logger.info("Addition of %s %s %s %s %s",a,AND,b,IS,c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
-		return new ResponseEntity<Object>(output,HttpStatus.OK);
+		return new ResponseEntity<>(output,HttpStatus.OK);
 	}
 	
 	@PostMapping("/subtraction")
@@ -36,10 +39,10 @@ public class SimpleCalculatorController {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.subtract(a, b);
-		logger.info("Subtraction of "+a+" and "+b+" is "+c);
+		logger.info("Subtraction of %s %s %s %s %s",a,AND,b,IS,c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
-		return new ResponseEntity<Object>(output,HttpStatus.OK);
+		return new ResponseEntity<>(output,HttpStatus.OK);
 	}
 	
 	@PostMapping("/multiplication")
@@ -47,10 +50,10 @@ public class SimpleCalculatorController {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.multiply(a, b);
-		logger.info("Multiplication of "+a+" and "+b+" is "+c);
+		logger.info("Multiplication of %s %s %s %s %s",a,AND,b,IS,c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
-		return new ResponseEntity<Object>(output,HttpStatus.OK);
+		return new ResponseEntity<>(output,HttpStatus.OK);
 	}
 	
 	@PostMapping("/division")
@@ -58,9 +61,9 @@ public class SimpleCalculatorController {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.divide(a, b);
-		logger.info("Division of "+a+" and "+b+" is "+c);
+		logger.info("Division of %s %s %s %s %s",a,AND,b,IS,c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
-		return new ResponseEntity<Object>(output,HttpStatus.OK);
+		return new ResponseEntity<>(output,HttpStatus.OK);
 	}
 }
