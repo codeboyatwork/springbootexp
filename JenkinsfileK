@@ -8,9 +8,6 @@ node('') {
 	      withMaven(maven: 'maven') {
     		bat "mvn clean compile"
 		}
-	      
-		
-
 	    }
 	    stage('Run Unit Tests') {
 	       withMaven(maven: 'maven') {
@@ -29,4 +26,12 @@ node('') {
 	      bat "mvn clean install -DskipTests"
 	      }
 	    }
+	    
+	     stage('SonarQube Analysis') {
+   		 withMaven(maven: 'maven') {
+    		withSonarQubeEnv() {
+      			bat "mvn clean verify sonar:sonar"
+   		 }
+		 }
+ 		 }
 }
