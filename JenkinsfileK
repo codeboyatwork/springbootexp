@@ -29,7 +29,7 @@ node('') {
 	    
 	     stage('SonarQube Analysis') {
    		 withMaven(maven: 'maven') {
-    		withSonarQubeEnv() {
+    		withSonarQubeEnv(credentialsId: 'admin') {
       			bat "mvn clean verify sonar:sonar"
    		 }
 		 }
