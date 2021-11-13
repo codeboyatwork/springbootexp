@@ -13,6 +13,8 @@ import com.experiment.demo.model.InputEntity;
 import com.experiment.demo.model.OutputEntity;
 import com.experiment.demo.serviceimpl.CalculatorService;
 
+import ch.qos.logback.classic.Level;
+
 @RestController
 public class SimpleCalculatorController {
 	@Autowired
@@ -28,7 +30,7 @@ public class SimpleCalculatorController {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.add(a, b);
-		logger.info("Addition of %s %s %s %s %s",a,AND,b,IS,c);
+		logger.info(String.format("Addition of %s %s %s %s %s",a,AND,b,IS,c));
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
 		return new ResponseEntity<>(output,HttpStatus.OK);
@@ -39,7 +41,7 @@ public class SimpleCalculatorController {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.subtract(a, b);
-		logger.info("Subtraction of %s %s %s %s %s",a,AND,b,IS,c);
+		logger.info(String.format("Subtraction of %s %s %s %s %s",a,AND,b,IS,c));
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
 		return new ResponseEntity<>(output,HttpStatus.OK);
@@ -50,7 +52,7 @@ public class SimpleCalculatorController {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.multiply(a, b);
-		logger.info("Multiplication of %s %s %s %s %s",a,AND,b,IS,c);
+		logger.info(String.format("Multiplication of %s %s %s %s %s",a,AND,b,IS,c));
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
 		return new ResponseEntity<>(output,HttpStatus.OK);
@@ -61,7 +63,7 @@ public class SimpleCalculatorController {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.divide(a, b);
-		logger.info("Division of %s %s %s %s %s",a,AND,b,IS,c);
+		logger.info(String.format("Division of %s %s %s %s %s",a,AND,b,IS,c));
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
 		return new ResponseEntity<>(output,HttpStatus.OK);
