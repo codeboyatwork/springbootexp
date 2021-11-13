@@ -22,23 +22,23 @@ node('') {
 	    stage('Compile') {
 	      // build project via maven
 	      
-	      sh "'${mvnHome}/bin/mvn' -s $MAVEN_SETTINGS clean compile"
+	      sh "'${mvnHome}/bin/mvn' clean compile"
 		
 
 	    }
 	    stage('Run Unit Tests') {
 	      
-	      sh "'${mvnHome}/bin/mvn' -s $MAVEN_SETTINGS clean test -Dtest=com.experiment.demo.unittests.**.*Test*"
+	      sh "'${mvnHome}/bin/mvn' clean test -Dtest=com.experiment.demo.unittests.**.*Test*"
 		
 
 	    } 
 	    stage('Run Integration Tests') {
 	     
-	      sh "'${mvnHome}/bin/mvn' -s $MAVEN_SETTINGS clean test -Dtest=com.experiment.demo.integrationtests.**.*Test*"
+	      sh "'${mvnHome}/bin/mvn' clean test -Dtest=com.experiment.demo.integrationtests.**.*Test*"
 		
 
 	    }   
 	    stage('Build Project') {
-	      sh "'${mvnHome}/bin/mvn' -s $MAVEN_SETTINGS clean install -DskipTests"
+	      sh "'${mvnHome}/bin/mvn' clean install -DskipTests"
 	    }
 }
