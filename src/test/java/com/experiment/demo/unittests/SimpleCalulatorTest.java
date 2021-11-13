@@ -13,7 +13,7 @@ import com.experiment.demo.testbase.ProvideIntsForDivision;
 import com.experiment.demo.testbase.ProvideIntsForMultiplication;
 import com.experiment.demo.testbase.ProvideIntsForSubtraction;
 
-public class SimpleCalulatorTest {
+class SimpleCalulatorTest {
 	
 	CalculatorService service = new CalculatorService();
 

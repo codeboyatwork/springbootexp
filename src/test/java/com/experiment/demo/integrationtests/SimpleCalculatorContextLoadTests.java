@@ -19,12 +19,12 @@ class SimpleCalculatorContextLoadTests {
 	private CalculatorService service;
 	
 	@Test
-	public void contextLoadsCalculatorControllerBean() throws Exception {
+	void contextLoadsCalculatorControllerBean() throws Exception {
 		assertThat(controller).isNotNull();
 	}
 	
 	@Test
-	public void contextLoadsCalculatorServiceBean() throws Exception {
+	void contextLoadsCalculatorServiceBean() throws Exception {
 		assertThat(service).isNotNull();
 	}
 	

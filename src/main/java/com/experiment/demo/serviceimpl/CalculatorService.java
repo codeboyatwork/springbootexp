@@ -1,9 +1,13 @@
 package com.experiment.demo.serviceimpl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CalculatorService {
+	
+	Logger logger = LoggerFactory.getLogger(CalculatorService.class);
 
 	public long add(long a, long b) {
 		return a+b;
@@ -19,6 +23,7 @@ public class CalculatorService {
 		}
 		catch(ArithmeticException e)
 		{
+			logger.error("Divide by Zero Error");
 			throw e;
 		}
 	}
