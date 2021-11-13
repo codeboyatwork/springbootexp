@@ -13,13 +13,11 @@ import com.experiment.demo.model.InputEntity;
 import com.experiment.demo.model.OutputEntity;
 import com.experiment.demo.serviceimpl.CalculatorService;
 
-import ch.qos.logback.classic.Level;
-
 @RestController
 public class SimpleCalculatorController {
 	@Autowired
 	CalculatorService calculatorService;
-	
+
 	public static final Logger logger = LoggerFactory.getLogger(SimpleCalculatorController.class);
 
 	private static final String AND = "and";
@@ -30,42 +28,42 @@ public class SimpleCalculatorController {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.add(a, b);
-		logger.info(String.format("Addition of %s %s %s %s %s",a,AND,b,IS,c));
+		logger.info("Addition of {} {} {} {} {}", a, AND, b, IS, c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
-		return new ResponseEntity<>(output,HttpStatus.OK);
+		return new ResponseEntity<>(output, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/subtraction")
 	public ResponseEntity<Object> performSubtraction(@RequestBody InputEntity inputEntity) {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.subtract(a, b);
-		logger.info(String.format("Subtraction of %s %s %s %s %s",a,AND,b,IS,c));
+		logger.info("Subtraction of {} {} {} {} {}", a, AND, b, IS, c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
-		return new ResponseEntity<>(output,HttpStatus.OK);
+		return new ResponseEntity<>(output, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/multiplication")
 	public ResponseEntity<Object> performMultiplication(@RequestBody InputEntity inputEntity) {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.multiply(a, b);
-		logger.info(String.format("Multiplication of %s %s %s %s %s",a,AND,b,IS,c));
+		logger.info("Multiplication of {} {} {} {} {}", a, AND, b, IS, c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
-		return new ResponseEntity<>(output,HttpStatus.OK);
+		return new ResponseEntity<>(output, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/division")
 	public ResponseEntity<Object> performDivision(@RequestBody InputEntity inputEntity) {
 		long a = inputEntity.getA();
 		long b = inputEntity.getB();
 		long c = calculatorService.divide(a, b);
-		logger.info(String.format("Division of %s %s %s %s %s",a,AND,b,IS,c));
+		logger.info("Division of {} {} {} {} {}", a, AND, b, IS, c);
 		OutputEntity output = new OutputEntity();
 		output.setAnswer(c);
-		return new ResponseEntity<>(output,HttpStatus.OK);
+		return new ResponseEntity<>(output, HttpStatus.OK);
 	}
 }
