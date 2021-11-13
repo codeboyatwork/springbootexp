@@ -14,6 +14,13 @@ public class Student {
 	private Long id;
 	private String name;
 	private String passportNumber;
+	
+	public Student(Long id, String name, String passportNumber) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.passportNumber = passportNumber;
+	}
 	public Long getId() {
 		return id;
 	}

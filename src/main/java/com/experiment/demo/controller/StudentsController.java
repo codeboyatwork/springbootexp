@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.experiment.demo.model.Student;
+import com.experiment.demo.model.StudentInput;
 import com.experiment.demo.model.StudentNotFoundException;
 import com.experiment.demo.model.StudentRepository;
-
 
 @RestController
 public class StudentsController {
@@ -47,7 +47,8 @@ public class StudentsController {
 	}
 
 	@PostMapping("/students")
-	public ResponseEntity<Object> createStudent(@RequestBody Student student) {
+	public ResponseEntity<Object> createStudent(@RequestBody StudentInput studentInput) {
+		Student student = new Student(studentInput.getId(), studentInput.getName(), studentInput.getPassportNumber());
 		Student savedStudent = studentRepository.save(student);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -56,18 +57,17 @@ public class StudentsController {
 		return ResponseEntity.created(location).build();
 
 	}
-	
-	@PutMapping("/students/{id}")
-	public ResponseEntity<Object> updateStudent(@RequestBody Student student, @PathVariable long id) {
 
+	@PutMapping("/students/{id}")
+	public ResponseEntity<Object> updateStudent(@RequestBody StudentInput studentInput, @PathVariable long id) {
+		Student student = new Student(studentInput.getId(), studentInput.getName(), studentInput.getPassportNumber());
 		Optional<Student> studentOptional = studentRepository.findById(id);
 
 		if (!studentOptional.isPresent())
 			return ResponseEntity.notFound().build();
 
 		student.setId(id);
-		
-		
+
 		studentRepository.save(student);
 
 		return ResponseEntity.noContent().build();
