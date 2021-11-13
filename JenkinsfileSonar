@@ -1,0 +1,14 @@
+node('') {	   
+	    
+	    stage('Clone Repo') { // for display purposes	      
+	      git 'https://github.com/codeboyatwork/springbootexp.git'      
+	    } 
+	       
+	     stage('SonarQube Analysis') {
+   		 withMaven(maven: 'maven') {
+    		withSonarQubeEnv(credentialsId: 'admin') {
+      			bat "mvn clean verify sonar:sonar"
+   		 }
+		 }
+ 		 }
+}
