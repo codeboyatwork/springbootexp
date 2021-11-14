@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
@@ -31,11 +30,9 @@ class WordServiceIntegrationTests {
 	@Test
 	void testUpperCase() throws Exception {
 		String endpoint = "/word/uppercase";
-		InputWordEntity entity = new InputWordEntity();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		entity.setWord(WORD_TO_TEST);
-		ResponseEntity<OutputWordEntity> response = this.restTemplate.postForEntity(BASE_URL + port + endpoint, entity, OutputWordEntity.class);
+		InputWordEntity wordEntity = new InputWordEntity();
+		wordEntity.setWord(WORD_TO_TEST);
+		ResponseEntity<OutputWordEntity> response = this.restTemplate.postForEntity(BASE_URL + port + endpoint, wordEntity, OutputWordEntity.class);
 		assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
 		String answer = response.getBody().getWord();
@@ -45,11 +42,9 @@ class WordServiceIntegrationTests {
 	@Test
 	void testLowerCase() throws Exception {
 		String endpoint = "/word/lowercase";
-		InputWordEntity entity = new InputWordEntity();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		entity.setWord(WORD_TO_TEST);
-		ResponseEntity<OutputWordEntity> response = this.restTemplate.postForEntity(BASE_URL + port + endpoint, entity, OutputWordEntity.class);
+		InputWordEntity wordEntity = new InputWordEntity();
+		wordEntity.setWord(WORD_TO_TEST);
+		ResponseEntity<OutputWordEntity> response = this.restTemplate.postForEntity(BASE_URL + port + endpoint, wordEntity, OutputWordEntity.class);
 		assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
 		String answer = response.getBody().getWord();
